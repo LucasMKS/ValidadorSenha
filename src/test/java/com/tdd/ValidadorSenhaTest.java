@@ -19,5 +19,16 @@ class ValidadorSenhaTest {
         assertTrue(erros.contains("A senha deve conter pelo menos 2 dígitos"),
                    "Esperava erro de dígitos mínimos");
     }
+    
+    @Test
+    void variosErrosSimultaneos() {
+        // “senha”: menor que 8, 0 dígitos, sem maiúscula, sem especial
+        List<String> erros = ValidadorSenha.validar("senha");
+        assertEquals(4, erros.size(), "Esperava 4 erros distintos");
+        assertTrue(erros.contains("A senha deve ter pelo menos 8 caracteres"));
+        assertTrue(erros.contains("A senha deve conter pelo menos 2 dígitos"));
+        assertTrue(erros.contains("A senha deve conter pelo menos uma letra maiuscula"));
+        assertTrue(erros.contains("A senha deve conter pelo menos um caractere especial"));
+    }
 
 }
