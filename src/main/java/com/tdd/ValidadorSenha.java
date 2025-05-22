@@ -44,7 +44,7 @@ public class ValidadorSenha {
     }
 
     public static boolean contemCaractereEspecial(String senha) {
-        return senha.matches(".*[!@#$%^&*()_+\\-=\\{};':\"\\\\|,.<>/?].*");
+        return senha.matches(".*[^A-Za-z0-9].*");
     }
 
     public static boolean contemLetraMinuscula(String senha) {
