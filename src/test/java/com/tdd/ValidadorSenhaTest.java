@@ -31,4 +31,6 @@ class ValidadorSenhaTest {
         assertTrue(erros.contains("A senha deve conter pelo menos um caractere especial"));
     }
 
+    
+
 }
