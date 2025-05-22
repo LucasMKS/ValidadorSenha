@@ -4,32 +4,50 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ValidadorSenha {
-     public static List<String> validar(String senha) {
+
+    public static List<String> validar(String senha) {
         List<String> erros = new ArrayList<>();
 
-        // 1) comprimento mínimo
-        if (senha == null || senha.length() < 8) {
+        if (!temTamanhoMinimo(senha)) {
             erros.add("A senha deve ter pelo menos 8 caracteres");
         }
 
-        // 2) pelo menos 2 dígitos
-        long countDigitos = (senha == null)
-                ? 0
-                : senha.chars().filter(Character::isDigit).count();
-        if (countDigitos < 2) {
+        if (!temDoisDigitos(senha)) {
             erros.add("A senha deve conter pelo menos 2 dígitos");
         }
 
-        // 3) ao menos 1 letra maiúscula
-        if (senha == null || !senha.chars().anyMatch(Character::isUpperCase)) {
+        if (!contemLetraMaiuscula(senha)) {
             erros.add("A senha deve conter pelo menos uma letra maiuscula");
         }
 
-        // 4) ao menos 1 caractere especial
-        if (senha == null || !senha.matches(".[^A-Za-z0-9].")) {
+        if (!contemCaractereEspecial(senha)) {
             erros.add("A senha deve conter pelo menos um caractere especial");
         }
 
+        if (!contemLetraMinuscula(senha)) {
+            erros.add("A senha deve conter pelo menos uma letra minuscula");
+        }
+
         return erros;
+    }
+
+    public static boolean temTamanhoMinimo(String senha) {
+        return senha.length() >= 8;
+    }
+
+    public static boolean temDoisDigitos(String senha) {
+        return senha.chars().filter(Character::isDigit).count() >= 2;
+    }
+
+    public static boolean contemLetraMaiuscula(String senha) {
+        return senha.matches(".*[A-Z].*");
+    }
+
+    public static boolean contemCaractereEspecial(String senha) {
+        return senha.matches(".*[!@#$%^&*()_+\\-=\\{};':\"\\\\|,.<>/?].*");
+    }
+
+    public static boolean contemLetraMinuscula(String senha) {
+        return senha.matches(".*[a-z].*");
     }
 }
