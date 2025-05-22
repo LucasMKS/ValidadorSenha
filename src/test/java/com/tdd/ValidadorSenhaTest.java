@@ -32,7 +32,22 @@ class ValidadorSenhaTest {
         assertTrue(erros.contains("A senha deve conter pelo menos uma letra maiuscula"));
         assertTrue(erros.contains("A senha deve conter pelo menos um caractere especial"));
     }
+     @Test
+    void senhaDeveConterPeloMenosUmaLetraMinuscula() {
+        String senhaSemMinuscula = "SENHA123!";
+        boolean resultado = ValidadorSenha.contemLetraMinuscula(senhaSemMinuscula);
+        assertFalse(resultado, "Esperava falso pois não contém letra minúscula");
 
-    
+        String senhaComMinuscula = "Senha123!";
+        resultado = ValidadorSenha.contemLetraMinuscula(senhaComMinuscula);
+        assertTrue(resultado, "Esperava verdadeiro pois contém letra minúscula");
+    }
+
+    @Test
+    void erroQuandoNaoTemLetraMinuscula() {
+        List<String> erros = ValidadorSenha.validar("SENHA123!");
+        assertTrue(erros.contains("A senha deve conter pelo menos uma letra minuscula"),
+                   "Esperava erro por falta de letra minúscula");
+    }
 
 }
